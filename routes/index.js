@@ -21,9 +21,12 @@ router.get('/members', function(req, res, next) {
         var user = {};
         var mobile = str[4].replace(/^"|"$|^ | $/g, '').trim();
         mobile = mobile.substring(mobile.length-10);
+        var amazon = str[3].replace(/^"|"$/g, '');
+        var positionOfAt = amazon.indexOf("@");
+        amazon = amazon.substring(0,positionOfAt-3) + "**" + amazon.substring(positionOfAt-1);
         user["id"] = i;
         user["name"] = str[2].replace(/^"|"$/g, '');
-        user["amazon"] = str[3].replace(/^"|"$/g, '');
+        user["amazon"] = amazon;
         user["floor"] = str[5].replace(/^"|"$/g, '');
         user["block"] = str[6].replace(/^"|"$/g, '');
         user["mobile"] = mobile.substring(0,3) + "*****" + mobile.substring(8);
