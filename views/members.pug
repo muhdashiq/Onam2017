@@ -2,5 +2,24 @@ extends layout
 
 block content
   h1 Members
-  h3 Member list is not updated yet.
-  p Please visit again.
+  table(class="table table-hover")
+    thead
+      th #
+      th Name
+      th amazon@
+      th Block
+      th Floor
+    tbody
+      each member in members
+        tr
+          td= member.id
+          td= member.name
+          td= member.amazon
+          td= member.block
+          td= member.floor
+    tfooter
+      th #
+      th Name
+      th amazon@
+      th Block
+      th Floor
