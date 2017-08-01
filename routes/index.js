@@ -14,23 +14,25 @@ router.get('/members', function(req, res, next) {
     }
     var dataArray = data.toString().split(/\r?\n/);
     var membersObject = [];
-    //console.log(dataArray[1]);
+    console.log(dataArray[1]);
     dataArray.forEach(function(v,i){
       if(v !='DUI' && i!=0){
         var str = v.split(",");
         var user = {};
+        var mobile = str[4].replace(/^"|"$|^ | $/g, '').trim();
+        mobile = mobile.substring(mobile.length-10);
         user["id"] = i;
         user["name"] = str[2].replace(/^"|"$/g, '');
         user["amazon"] = str[3].replace(/^"|"$/g, '');
         user["floor"] = str[5].replace(/^"|"$/g, '');
         user["block"] = str[6].replace(/^"|"$/g, '');
-        user["mobile"] = str[4].replace(/^"|"$|^ | $/g, '');
+        user["mobile"] = mobile.substring(0,3) + "*****" + mobile.substring(8);
         //console.log(i + ":" + str[2]);
         membersObject.push(user);
       }
     });
-    console.log(membersObject);
-    //res.send(membersObject);
+    //console.log(membersObject);
+    //res.send(data);
     res.render('members', { members: membersObject });
   });
 });
