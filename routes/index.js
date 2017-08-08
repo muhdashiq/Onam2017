@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/members', function(req, res, next) {
-  //res.render('members', { title: 'Members' });
   fs.readFile('./data/input.csv', 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
@@ -30,18 +29,15 @@ router.get('/members', function(req, res, next) {
         user["floor"] = str[5].replace(/^"|"$/g, '');
         user["block"] = str[6].replace(/^"|"$/g, '');
         user["mobile"] = mobile.substring(0,3) + "*****" + mobile.substring(8);
-        //console.log(i + ":" + str[2]);
+        user["memberShip"] = false;
         membersObject.push(user);
       }
     });
-    //console.log(membersObject);
-    //res.send(data);
     res.render('members', { members: membersObject });
   });
 });
 
 //https://docs.google.com/forms/d/19ODwZzPfb_yhcowcRot39lGfulFsh0i-SOfpn6afw14/edit#responses
-
 fs.readFile('/etc/hosts', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);

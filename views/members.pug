@@ -2,6 +2,9 @@ extends layout
 
 block content
   h1 Members
+  if isAdmin
+    button(onclick="myFunction()",class="button") Print this page
+  hr
   table(class="table table-hover")
     thead
       th #
@@ -15,6 +18,8 @@ block content
         tr
           td= member.id
           td= member.name
+            if member.memberShip
+              span(class="badge") prime
           td= member.mobile
           td= member.amazon
           td= member.block
@@ -26,3 +31,7 @@ block content
       th amazon@
       th Block
       th Floor
+  script.
+      function myFunction() {
+      window.print();
+      }
